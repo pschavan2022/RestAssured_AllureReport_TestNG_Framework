@@ -1,8 +1,6 @@
 package commonFunctionsPackage;
 
 import static io.restassured.RestAssured.given;
-
-
 import io.restassured.RestAssured;
 
 

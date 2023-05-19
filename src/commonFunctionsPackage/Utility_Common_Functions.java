@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.io.FileInputStream;
-
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -35,6 +34,7 @@ public class Utility_Common_Functions {
 		XSSFWorkbook workbook=new XSSFWorkbook(fis);
 		//step3: access the sheet name
 		int countofsheet=workbook.getNumberOfSheets();
+		// System.out.println(countofsheet);
 		for (int i=0;i<countofsheet;i++)
 		{
 			String filesheetname=workbook.getSheetName(i);
@@ -43,13 +43,13 @@ public class Utility_Common_Functions {
 				//step4: access the row from where the data is suppose to fetch
 				XSSFSheet sheet=workbook.getSheetAt(i);
 				Iterator<Row> rows=sheet.iterator();
-				Row r=rows.next();
+				// Row r=rows.next();
 				while(rows.hasNext())
 				{
-					Row r1=rows.next();
-					if(r1.getCell(0).getStringCellValue().equalsIgnoreCase(testcasename))
+					Row r2=rows.next();
+					if(r2.getCell(0).getStringCellValue().equalsIgnoreCase(testcasename))
 					{
-						Iterator<Cell> cellvalues=r1.cellIterator();
+						Iterator<Cell> cellvalues=r2.cellIterator();
 						while(cellvalues.hasNext()) {
 							String testdata=cellvalues.next().getStringCellValue();
 							ArrayData.add(testdata);

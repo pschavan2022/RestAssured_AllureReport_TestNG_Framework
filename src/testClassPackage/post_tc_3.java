@@ -1,49 +1,41 @@
 package testClassPackage;
+
 import java.io.IOException;
 import java.time.LocalDate;
-
 import org.testng.Assert;
 import commonFunctionsPackage.API_Common_Function;
 import commonFunctionsPackage.Utility_Common_Functions;
 import io.restassured.path.json.JsonPath;
 import requestRepositoryPackage.post_req_repository;
 
-public class post_tc_1 {
+public class post_tc_3 {
 	
-	public static void execute() throws IOException {
-		
-		for(int i=0 ; i<5 ; i++) 
+public static void execute() throws IOException {
+	
+	for(int i=0;i<5;i++)
 		{
-			
 			String baseURI=post_req_repository.base_URI();
-			String requestBody=post_req_repository.post_req_tc1();
+			String requestBody=post_req_repository.post_req_tc3();
 			String resource=post_req_repository.post_resource();
-
-			int statusCode = API_Common_Function.response_statusCode(baseURI , requestBody , resource);
 			
-			if(statusCode == 201) 
-			{	
-				String responseBody = API_Common_Function.response_Body(baseURI , requestBody , resource);
-				
-				
-				post_tc_1.validator(responseBody, statusCode,requestBody);
-				
-				Utility_Common_Functions.evidenceFileCreator("post_tc_1", requestBody, responseBody);
-				
-				break;
-				
-			}
+			int statusCode=API_Common_Function.response_statusCode(baseURI, requestBody, resource);
+			if(statusCode==201)
+				{
+					String responseBody=API_Common_Function.response_Body(baseURI, requestBody, resource);
+					System.out.println(responseBody);
+					post_tc_1.validator(responseBody, statusCode, requestBody);
+					Utility_Common_Functions.evidenceFileCreator("post_tc_3", requestBody , responseBody);
+					break;
+				}
 			else 
 			{
-				System.out.println("Correct StatusCode is not found, hence retrying the API ");
+				System.out.println("correct status code not found hence retrying");
 			}
-			
-		}	
-	}	
-			
-		
-	public static void validator(String responseBody,int statusCode,String requestBody) {
-		
+		}
+}
+
+public static void validator(String responseBody,int statusCode,String requestBody) {
+	
 		//Parse response body and its parameters
 		JsonPath jspres=new JsonPath(responseBody);
 		String res_name=jspres.getString("name");
@@ -65,3 +57,4 @@ public class post_tc_1 {
 		Assert.assertEquals(res_createdAt.substring(0,10), currentdate);
 	}
 }
+
