@@ -3,14 +3,16 @@ package testClassPackage;
 import java.io.IOException;
 import java.time.LocalDate;
 import org.testng.Assert;
+import org.testng.annotations.Test;
+
 import commonFunctionsPackage.API_Common_Function;
 import commonFunctionsPackage.Utility_Common_Functions;
 import io.restassured.path.json.JsonPath;
 import requestRepositoryPackage.post_req_repository;
 
 public class post_tc_3 {
-	
-public static void execute() throws IOException {
+	@Test	
+	public static void execute() throws IOException {
 	
 	for(int i=0;i<5;i++)
 		{
@@ -19,6 +21,7 @@ public static void execute() throws IOException {
 			String resource=post_req_repository.post_resource();
 			
 			int statusCode=API_Common_Function.response_statusCode(baseURI, requestBody, resource);
+			System.out.println("Status code is: "+ statusCode + " Created");
 			if(statusCode==201)
 				{
 					String responseBody=API_Common_Function.response_Body(baseURI, requestBody, resource);
@@ -29,7 +32,7 @@ public static void execute() throws IOException {
 				}
 			else 
 			{
-				System.out.println("correct status code not found hence retrying");
+				System.out.println("Correct StatusCode is not found, hence retrying the API");
 			}
 		}
 }

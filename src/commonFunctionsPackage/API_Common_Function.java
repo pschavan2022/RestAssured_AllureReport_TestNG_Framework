@@ -18,7 +18,6 @@ public class API_Common_Function {
 	}
 	
 	
-	
 	public static String response_Body(String baseURI,String requestbody,String resource) {
 	
 	RestAssured.baseURI=baseURI;

@@ -3,13 +3,15 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 import org.testng.Assert;
+import org.testng.annotations.Test;
+
 import commonFunctionsPackage.API_Common_Function;
 import commonFunctionsPackage.Utility_Common_Functions;
 import io.restassured.path.json.JsonPath;
 import requestRepositoryPackage.post_req_repository;
 
 public class post_tc_1 {
-	
+	@Test
 	public static void execute() throws IOException {
 		
 		for(int i=0 ; i<5 ; i++) 
@@ -20,19 +22,15 @@ public class post_tc_1 {
 			String resource=post_req_repository.post_resource();
 
 			int statusCode = API_Common_Function.response_statusCode(baseURI , requestBody , resource);
-			
+			System.out.println("Status code is: "+ statusCode + " Created");
 			if(statusCode == 201) 
-			{	
-				String responseBody = API_Common_Function.response_Body(baseURI , requestBody , resource);
-				
-				
-				post_tc_1.validator(responseBody, statusCode,requestBody);
-				
-				Utility_Common_Functions.evidenceFileCreator("post_tc_1", requestBody, responseBody);
-				
-				break;
-				
-			}
+				{	
+					String responseBody = API_Common_Function.response_Body(baseURI , requestBody , resource);
+					System.out.println(responseBody);
+					post_tc_1.validator(responseBody, statusCode,requestBody);
+					Utility_Common_Functions.evidenceFileCreator("post_tc_1", requestBody, responseBody);
+					break;
+				}
 			else 
 			{
 				System.out.println("Correct StatusCode is not found, hence retrying the API ");
@@ -53,7 +51,7 @@ public class post_tc_1 {
 		String currentdate=LocalDate.now().toString();
 
 		//parse request body and its parameters
-		JsonPath jspreq=new JsonPath ( requestBody);
+		JsonPath jspreq=new JsonPath (requestBody);
 		String req_name=jspreq.getString("name");
 		String req_job=jspreq.getString("job");
 

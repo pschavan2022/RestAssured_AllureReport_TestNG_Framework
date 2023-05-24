@@ -3,24 +3,26 @@ package testClassPackage;
 import java.io.IOException;
 import java.time.LocalDate;
 import org.testng.Assert;
+import org.testng.annotations.Test;
+
 import commonFunctionsPackage.API_Common_Function;
 import commonFunctionsPackage.Utility_Common_Functions;
 import io.restassured.path.json.JsonPath;
 import requestRepositoryPackage.post_req_repository;
 
 public class post_tc_2 {
+	@Test
+		public static void execute() throws IOException {
 	
-public static void execute() throws IOException {
-	
-	for(int i=0;i<5;i++)
-		{
-			String baseURI=post_req_repository.base_URI();
-			String requestBody=post_req_repository.post_req_tc2();
-			String resource=post_req_repository.post_resource();
+		for(int i=0;i<5;i++)
+			{
+				String baseURI=post_req_repository.base_URI();
+				String requestBody=post_req_repository.post_req_tc2();
+				String resource=post_req_repository.post_resource();
 			
-			int statusCode=API_Common_Function.response_statusCode(baseURI, requestBody, resource);
-			
-			if(statusCode==201)
+				int statusCode=API_Common_Function.response_statusCode(baseURI, requestBody, resource);
+				System.out.println("Status code is: "+ statusCode + " Created");
+				if(statusCode==201)
 				{
 					String responseBody=API_Common_Function.response_Body(baseURI, requestBody, resource);
 					System.out.println(responseBody);
@@ -30,7 +32,7 @@ public static void execute() throws IOException {
 				}
 			else 
 			{
-				System.out.println("correct status code not found hence retrying");
+				System.out.println("Correct StatusCode is not found, hence retrying the API");
 			}
 		}
 }

@@ -10,8 +10,11 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.testng.annotations.AfterTest;
+
 
 public class Utility_Common_Functions {
+	@AfterTest
 	public static void evidenceFileCreator(String filename,String requestbody,String responsebody) throws IOException
 	{
 		File newfile=new File("D:\\Study\\Testing\\MR\\Rest assured\\RestAs Framework\\" +filename+".txt");

@@ -2,10 +2,13 @@ package requestRepositoryPackage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import org.testng.annotations.BeforeTest;
+
 import commonFunctionsPackage.Utility_Common_Functions;
 
 public class post_req_repository {
-	
+	@BeforeTest
 	public static String base_URI() {
 		String BaseURI = "https://reqres.in/";
 		
